@@ -5,63 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>متجر التجميل</title>
   <style>
-    body { font-family: Arial, sans-serif; margin:0; background:#f7f7f7; }
-    header { background:#222; color:white; padding:10px; text-align:center; }
-    nav { background:#ff4d88; padding:10px; text-align:center; }
-    nav a { color:white; text-decoration:none; margin:0 10px; font-weight:bold; }
-    .products { display:grid; grid-template-columns:1fr 1fr; gap:15px; padding:15px; }
-    .card { background:white; border-radius:10px; padding:10px; text-align:center; box-shadow:0 2px 5px rgba(0,0,0,0.2); }
-    .card img { width:100%; border-radius:10px; }
-    .card h3 { font-size:16px; margin:10px 0 5px; }
-    .card p { font-size:14px; color:#555; }
-    .card button { background:#ff4d88; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer; margin-top:10px; }
-    .card button:hover { background:#e6005c; }
-    footer { background:#222; color:white; text-align:center; padding:10px; position:fixed; bottom:0; width:100%; }
+    body { font-family: Arial, sans-serif; margin:0; background:#fafafa; }
+    header {
+      background:#111; color:#fff; padding:15px;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    header h1 { margin:0; font-size:20px; }
+    nav ul { list-style:none; margin:0; padding:0; display:flex; }
+    nav ul li { margin: 0 10px; }
+    nav ul li a { color:#fff; text-decoration:none; }
+    nav ul li a:hover { text-decoration:underline; }
+
+    /* زر تسجيل الدخول */
+    .login-btn {
+      background:#e91e63; color:white; border:none;
+      padding:8px 15px; border-radius:5px; cursor:pointer;
+    }
+
+    /* منيو جانبية */
+    .menu {
+      width:200px; background:#fff; position:fixed; top:0; right:-220px;
+      height:100%; box-shadow:-2px 0 5px rgba(0,0,0,0.1);
+      transition: right 0.3s; padding:20px;
+    }
+    .menu.open { right:0; }
+    .menu h3 { margin-top:0; }
+    .menu ul { list-style:none; padding:0; }
+    .menu ul li { margin:15px 0; }
+    .menu ul li a { text-decoration:none; color:#333; }
+
+    .overlay {
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.5); display:none;
+    }
+    .overlay.show { display:block; }
+
   </style>
 </head>
 <body>
 
-  <!-- الهيدر -->
   <header>
-    <h2>💄 متجر التجميل</h2>
+    <h1>💄 متجر التجميل</h1>
+    <nav>
+      <ul>
+        <li><a href="#">الرئيسية</a></li>
+        <li><a href="#">مستحضرات التجميل</a></li>
+        <li><a href="#">العطور</a></li>
+        <li><button class="login-btn" onclick="login()">تسجيل الدخول</button></li>
+        <li><button class="login-btn" onclick="toggleMenu()">☰ القائمة</button></li>
+      </ul>
+    </nav>
   </header>
 
-  <!-- الناف بار -->
-  <nav>
-    <a href="#">الرئيسية</a>
-    <a href="#">مستحضرات التجميل</a>
-    <a href="#">العطور</a>
-    <a href="#">حسابي</a>
-  </nav>
-
-  <!-- المنتجات -->
-  <div class="products">
-    <div class="card">
-      <img src="images/rouge.jpg" alt="روج Golden Rose">
-      <h3>روج صغير - Golden Rose</h3>
-      <p>روج مميز بحجم صغير وألوان جذابة من Golden Rose</p>
-      <button>شراء</button>
-    </div>
-
-    <div class="card">
-      <img src="images/perfume.jpg" alt="عطر جورجينا">
-      <h3>عطر جورجينا - Laverne</h3>
-      <p>عطر فاخر من لافيرن بتركيبة مميزة تدوم طويلاً</p>
-      <button>شراء</button>
-    </div>
-
-    <div class="card">
-      <img src="images/foundation.jpg" alt="كريم أساس Golden Rose">
-      <h3>كريم أساس - Golden Rose</h3>
-      <p>كريم أساس خفيف يمنحك تغطية طبيعية وبشرة صافية</p>
-      <button>شراء</button>
-    </div>
+  <!-- القائمة الجانبية -->
+  <div class="menu" id="sideMenu">
+    <h3>الأصناف</h3>
+    <ul>
+      <li><a href="#">مكياج</a></li>
+      <li><a href="#">عطور</a></li>
+      <li><a href="#">كريمات</a></li>
+      <li><a href="#">اكسسوارات</a></li>
+    </ul>
   </div>
+  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
-  <!-- الفوتر -->
-  <footer>
-    &copy; 2025 متجر التجميل
-  </footer>
+  <script>
+    function login() {
+      alert("هنا يجيك تسجيل الدخول (تقدر تخليه صفحة منفصلة أو نافذة)");
+    }
+
+    function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("open");
+      document.getElementById("overlay").classList.toggle("show");
+    }
+  </script>
 
 </body>
 </html>
