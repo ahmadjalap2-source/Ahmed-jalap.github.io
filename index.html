@@ -2,32 +2,62 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>موقعي الأول</title>
+  <title>Nawras Flowers</title>
   <style>
     body {
-      background-color: #000000; /* الخلفية سوداء */
-      color: #ffffff;            /* النص أبيض */
-      font-family: 'Tahoma', sans-serif;
+      background-color: #000; /* خلفية سوداء */
+      color: #fff; /* النص أبيض */
+      font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 100px;
+      padding: 20px;
     }
     h1 {
-      color: #ffffff; /* العنوان أبيض */
+      color: #f1c40f; /* أصفر ذهبي */
     }
-    p {
-      color: #bbbbbb; /* النص رمادي فاتح */
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
     }
-    a {
-      color: #00ffcc; /* الروابط لون أزرق-أخضر فاتح */
-      text-decoration: none;
+    .product {
+      background: #111;
+      border: 1px solid #444;
+      border-radius: 12px;
+      padding: 20px;
+      width: 250px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    }
+    .product img {
+      width: 200px;
+      border-radius: 10px;
+    }
+    .price {
+      color: #2ecc71; /* أخضر */
+      font-size: 18px;
       font-weight: bold;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>أهلاً 👋 أنا أحمد</h1>
-  <p>هذا أول موقع أسويه بالجوال 🎉</p>
 
-  <a href="about.html">🔗 صفحة عني</a>
+  <h1>🌸 Nawras Flowers 🌸</h1>
+
+  <div class="products">
+    <div class="product">
+      <h2>باقة ورد صغيرة</h2>
+      <img src="product1.jpg" alt="صورة المنتج الأول">
+      <p class="price">السعر: 60 ريال</p>
+    </div>
+
+    <div class="product">
+      <h2>باقة ورد كبيرة</h2>
+      <img src="product2.jpg" alt="صورة المنتج الثاني">
+      <p class="price">السعر: 120 ريال</p>
+    </div>
+  </div>
+
 </body>
 </html>
