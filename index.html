@@ -1,35 +1,67 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>Nawras Flowers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>متجر التجميل</title>
   <style>
-    body {
-      background-color: black;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-    .product {
-      border: 1px solid white;
-      margin: 20px;
-      padding: 15px;
-      border-radius: 10px;
-    }
-    img {
-      width: 200px;
-      border-radius: 10px;
-    }
+    body { font-family: Arial, sans-serif; margin:0; background:#f7f7f7; }
+    header { background:#222; color:white; padding:10px; text-align:center; }
+    nav { background:#ff4d88; padding:10px; text-align:center; }
+    nav a { color:white; text-decoration:none; margin:0 10px; font-weight:bold; }
+    .products { display:grid; grid-template-columns:1fr 1fr; gap:15px; padding:15px; }
+    .card { background:white; border-radius:10px; padding:10px; text-align:center; box-shadow:0 2px 5px rgba(0,0,0,0.2); }
+    .card img { width:100%; border-radius:10px; }
+    .card h3 { font-size:16px; margin:10px 0 5px; }
+    .card p { font-size:14px; color:#555; }
+    .card button { background:#ff4d88; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer; margin-top:10px; }
+    .card button:hover { background:#e6005c; }
+    footer { background:#222; color:white; text-align:center; padding:10px; position:fixed; bottom:0; width:100%; }
   </style>
 </head>
 <body>
-  <h1>مرحبا بكم في متجر Nawras Flowers</h1>
 
-  <div class="product">
-    <img src="images/IMG_2504.jpeg" alt="منتج">
-    <h2>عطر جورجينا من لافيرن</h2>
-    <p>السعر: 60 ريال</p>
+  <!-- الهيدر -->
+  <header>
+    <h2>💄 متجر التجميل</h2>
+  </header>
+
+  <!-- الناف بار -->
+  <nav>
+    <a href="#">الرئيسية</a>
+    <a href="#">مستحضرات التجميل</a>
+    <a href="#">العطور</a>
+    <a href="#">حسابي</a>
+  </nav>
+
+  <!-- المنتجات -->
+  <div class="products">
+    <div class="card">
+      <img src="images/rouge.jpg" alt="روج Golden Rose">
+      <h3>روج صغير - Golden Rose</h3>
+      <p>روج مميز بحجم صغير وألوان جذابة من Golden Rose</p>
+      <button>شراء</button>
+    </div>
+
+    <div class="card">
+      <img src="images/perfume.jpg" alt="عطر جورجينا">
+      <h3>عطر جورجينا - Laverne</h3>
+      <p>عطر فاخر من لافيرن بتركيبة مميزة تدوم طويلاً</p>
+      <button>شراء</button>
+    </div>
+
+    <div class="card">
+      <img src="images/foundation.jpg" alt="كريم أساس Golden Rose">
+      <h3>كريم أساس - Golden Rose</h3>
+      <p>كريم أساس خفيف يمنحك تغطية طبيعية وبشرة صافية</p>
+      <button>شراء</button>
+    </div>
   </div>
+
+  <!-- الفوتر -->
+  <footer>
+    &copy; 2025 متجر التجميل
+  </footer>
 
 </body>
 </html>
