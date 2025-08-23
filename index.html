@@ -1,82 +1,180 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>متجر التجميل</title>
+  <title>Nawras Flowers</title>
   <style>
-    body { font-family: Arial, sans-serif; margin:0; background:#fafafa; }
-    header {
-      background:#111; color:#fff; padding:15px;
-      display:flex; justify-content:space-between; align-items:center;
-    }
-    header h1 { margin:0; font-size:20px; }
-    nav ul { list-style:none; margin:0; padding:0; display:flex; }
-    nav ul li { margin: 0 10px; }
-    nav ul li a { color:#fff; text-decoration:none; }
-    nav ul li a:hover { text-decoration:underline; }
-
-    /* زر تسجيل الدخول */
-    .login-btn {
-      background:#e91e63; color:white; border:none;
-      padding:8px 15px; border-radius:5px; cursor:pointer;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      text-align: center;
     }
 
-    /* منيو جانبية */
-    .menu {
-      width:200px; background:#fff; position:fixed; top:0; right:-220px;
-      height:100%; box-shadow:-2px 0 5px rgba(0,0,0,0.1);
-      transition: right 0.3s; padding:20px;
+    /* صندوق تسجيل */
+    .form-box {
+      background: #222;
+      padding: 20px;
+      border-radius: 15px;
+      width: 300px;
+      margin: 50px auto;
     }
-    .menu.open { right:0; }
-    .menu h3 { margin-top:0; }
-    .menu ul { list-style:none; padding:0; }
-    .menu ul li { margin:15px 0; }
-    .menu ul li a { text-decoration:none; color:#333; }
-
-    .overlay {
-      position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.5); display:none;
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: none;
     }
-    .overlay.show { display:block; }
+    button {
+      background: #ff4081;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 95%;
+      margin: 5px 0;
+    }
 
+    /* زر القائمة */
+    .menu-btn {
+      font-size: 30px;
+      cursor: pointer;
+      padding: 15px;
+      background: #ff4081;
+      color: white;
+      border: none;
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      border-radius: 8px;
+      display: none; /* يختفي لين يسجل الدخول */
+    }
+
+    /* القائمة الجانبية */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: #222;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidebar a {
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 20px;
+      color: white;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      background: #ff4081;
+    }
+
+    .sidebar .closebtn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    #menuPage {
+      display: none; /* ما يطلع إلا بعد الدخول */
+      padding: 20px;
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>💄 متجر التجميل</h1>
-    <nav>
-      <ul>
-        <li><a href="#">الرئيسية</a></li>
-        <li><a href="#">مستحضرات التجميل</a></li>
-        <li><a href="#">العطور</a></li>
-        <li><button class="login-btn" onclick="login()">تسجيل الدخول</button></li>
-        <li><button class="login-btn" onclick="toggleMenu()">☰ القائمة</button></li>
-      </ul>
-    </nav>
-  </header>
+  <h1>مرحباً بك في Nawras Flowers</h1>
+
+  <!-- صفحة تسجيل -->
+  <div id="authPage" class="form-box">
+    <h2>تسجيل / دخول</h2>
+    <input type="email" id="email" placeholder="الإيميل">
+    <input type="password" id="password" placeholder="كلمة المرور">
+    <button onclick="register()">تسجيل جديد</button>
+    <button onclick="login()">دخول</button>
+  </div>
+
+  <!-- زر القائمة -->
+  <button class="menu-btn" id="menuBtn" onclick="openMenu()">☰</button>
+
+  <!-- صفحة المنيو -->
+  <div id="menuPage">
+    <h2>القائمة الرئيسية</h2>
+    <p>اختر الصنف من القائمة الجانبية</p>
+  </div>
 
   <!-- القائمة الجانبية -->
-  <div class="menu" id="sideMenu">
-    <h3>الأصناف</h3>
-    <ul>
-      <li><a href="#">مكياج</a></li>
-      <li><a href="#">عطور</a></li>
-      <li><a href="#">كريمات</a></li>
-      <li><a href="#">اكسسوارات</a></li>
-    </ul>
+  <div id="mySidebar" class="sidebar">
+    <span class="closebtn" onclick="closeMenu()">×</span>
+    <a href="#">مكياج</a>
+    <a href="#">عطور</a>
+    <a href="#">كريمات</a>
+    <a href="#" onclick="logout()">خروج</a>
   </div>
-  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
 
   <script>
-    function login() {
-      alert("هنا يجيك تسجيل الدخول (تقدر تخليه صفحة منفصلة أو نافذة)");
+    // اكتب معلومات مشروعك من Firebase هنا
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "SENDER_ID",
+      appId: "APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function register() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(() => alert("تم التسجيل بنجاح ✅"))
+        .catch((error) => alert(error.message));
     }
 
-    function toggleMenu() {
-      document.getElementById("sideMenu").classList.toggle("open");
-      document.getElementById("overlay").classList.toggle("show");
+    function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => {
+          document.getElementById("authPage").style.display = "none";
+          document.getElementById("menuPage").style.display = "block";
+          document.getElementById("menuBtn").style.display = "block";
+        })
+        .catch((error) => alert("خطأ: " + error.message));
+    }
+
+    function logout() {
+      auth.signOut().then(() => {
+        document.getElementById("authPage").style.display = "block";
+        document.getElementById("menuPage").style.display = "none";
+        document.getElementById("menuBtn").style.display = "none";
+      });
+    }
+
+    function openMenu() {
+      document.getElementById("mySidebar").style.width = "250px";
+    }
+    function closeMenu() {
+      document.getElementById("mySidebar").style.width = "0";
     }
   </script>
 
