@@ -84,13 +84,42 @@
       font-size: 20px;
       color: red;
     }
+    /* المنيو */
+    .menu {
+      position: fixed;
+      top: 0;
+      right: -250px;
+      width: 220px;
+      height: 100%;
+      background: white;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+      padding: 15px;
+      transition: 0.3s;
+      z-index: 1000;
+    }
+    .menu.active {
+      right: 0;
+    }
+    .menu h2 {
+      margin-top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .menu a {
+      display: block;
+      margin: 12px 0;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <header>
     <span class="cart-icon" onclick="toggleCart()">🛒</span>
     <h1>Nawras Flowers</h1>
-    <span class="menu-btn">☰</span>
+    <span class="menu-btn" onclick="toggleMenu()">☰</span>
   </header>
 
   <div class="products">
@@ -114,6 +143,7 @@
     </div>
   </div>
 
+  <!-- السلة -->
   <div class="cart" id="cart">
     <h2>السلة <span class="close-btn" onclick="toggleCart()">✖</span></h2>
     <p>السلة فارغة</p>
@@ -122,10 +152,17 @@
     <label><input type="radio" name="pay"> دفع عند الاستلام</label>
   </div>
 
+  <!-- المنيو -->
+  <div class="menu" id="menu">
+    <h2>القائمة <span class="close-btn" onclick="toggleMenu()">✖</span></h2>
+    <a href="#">الصفحة الرئيسية</a>
+    <a href="#">من نحن</a>
+    <a href="#">تواصل معنا</a>
+  </div>
+
   <script>
     function toggleCart() {
       document.getElementById("cart").classList.toggle("active");
     }
-  </script>
-</body>
-</html>
+    function toggleMenu() {
+      document.getElementById("
