@@ -12,6 +12,16 @@
       direction: rtl;
     }
 
+    /* الحاوية */
+    .container {
+      max-width: 1000px;
+      margin: 30px auto; /* يخلي الموقع بالنص وفيه فراغ من فوق وتحت */
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
     /* الهيدر */
     header {
       display: flex;
@@ -61,7 +71,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin: 20px;
+      padding: 20px;
     }
     .product {
       border: 1px solid #ddd;
@@ -92,7 +102,7 @@
       background-color: #d64570;
     }
 
-    /* السلة (يمين) */
+    /* السلة */
     .cart {
       position: fixed;
       right: -350px;
@@ -120,8 +130,6 @@
       flex: 1;
       overflow-y: auto;
     }
-
-    /* طرق الدفع */
     .payment {
       margin-top: 15px;
     }
@@ -133,12 +141,45 @@
 </head>
 <body>
 
-  <!-- الهيدر -->
-  <header>
-    <span class="menu-btn" onclick="openMenu()">☰</span>
-    <h1>Nawras Flowers</h1>
-    <span class="cart-btn" onclick="toggleCart()">🛒</span>
-  </header>
+  <div class="container">
+    <!-- الهيدر -->
+    <header>
+      <span class="menu-btn" onclick="openMenu()">☰</span>
+      <h1>Nawras Flowers</h1>
+      <span class="cart-btn" onclick="toggleCart()">🛒</span>
+    </header>
+
+    <!-- المنتجات -->
+    <div id="products" class="products">
+      <div class="product" data-cat="makeup">
+        <img src="images/IMG_2504.jpeg" alt="منتج خاص">
+        <h3>منتج تجريبي</h3>
+        <p>السعر: 100 ريال</p>
+        <button onclick="addToCart('منتج تجريبي', 100)">أضف للسلة</button>
+      </div>
+
+      <div class="product" data-cat="makeup">
+        <img src="images/lipstick.jpg" alt="روج من Golden Rose">
+        <h3>روج صغير - Golden Rose</h3>
+        <p>السعر: 40 ريال</p>
+        <button onclick="addToCart('روج Golden Rose', 40)">أضف للسلة</button>
+      </div>
+
+      <div class="product" data-cat="perfume">
+        <img src="images/georgina.jpg" alt="عطر جورجينا">
+        <h3>عطر جورجينا - Lavern</h3>
+        <p>السعر: 60 ريال</p>
+        <button onclick="addToCart('عطر جورجينا', 60)">أضف للسلة</button>
+      </div>
+
+      <div class="product" data-cat="cream">
+        <img src="images/foundation.jpg" alt="كريم أساس Golden Rose">
+        <h3>كريم أساس - Golden Rose</h3>
+        <p>السعر: 55 ريال</p>
+        <button onclick="addToCart('كريم أساس Golden Rose', 55)">أضف للسلة</button>
+      </div>
+    </div>
+  </div>
 
   <!-- القائمة الجانبية -->
   <div id="sideMenu" class="side-menu">
@@ -147,38 +188,6 @@
     <a href="javascript:void(0)" onclick="filterCategory('perfume')">🌸 عطور</a>
     <a href="javascript:void(0)" onclick="filterCategory('cream')">🧴 كريمات</a>
     <a href="javascript:void(0)" onclick="closeMenu()">❌ إغلاق</a>
-  </div>
-
-  <!-- المنتجات -->
-  <div id="products" class="products">
-    <!-- منتج تجريبي -->
-    <div class="product" data-cat="makeup">
-      <img src="images/IMG_2504.jpeg" alt="منتج خاص">
-      <h3>منتج تجريبي</h3>
-      <p>السعر: 100 ريال</p>
-      <button onclick="addToCart('منتج تجريبي', 100)">أضف للسلة</button>
-    </div>
-
-    <div class="product" data-cat="makeup">
-      <img src="images/lipstick.jpg" alt="روج من Golden Rose">
-      <h3>روج صغير - Golden Rose</h3>
-      <p>السعر: 40 ريال</p>
-      <button onclick="addToCart('روج Golden Rose', 40)">أضف للسلة</button>
-    </div>
-
-    <div class="product" data-cat="perfume">
-      <img src="images/georgina.jpg" alt="عطر جورجينا">
-      <h3>عطر جورجينا - Lavern</h3>
-      <p>السعر: 60 ريال</p>
-      <button onclick="addToCart('عطر جورجينا', 60)">أضف للسلة</button>
-    </div>
-
-    <div class="product" data-cat="cream">
-      <img src="images/foundation.jpg" alt="كريم أساس Golden Rose">
-      <h3>كريم أساس - Golden Rose</h3>
-      <p>السعر: 55 ريال</p>
-      <button onclick="addToCart('كريم أساس Golden Rose', 55)">أضف للسلة</button>
-    </div>
   </div>
 
   <!-- السلة -->
