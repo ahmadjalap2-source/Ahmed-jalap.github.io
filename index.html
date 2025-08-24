@@ -22,10 +22,16 @@
       color: white;
     }
     header h1 {
-      font-size: 22px;
+      font-size: 26px;
     }
-    .menu-btn, .cart-btn {
-      font-size: 30px;
+
+    .menu-btn {
+      font-size: 40px; /* أكبر */
+      cursor: pointer;
+    }
+
+    .cart-btn {
+      font-size: 45px; /* أكبر */
       cursor: pointer;
     }
 
@@ -36,19 +42,20 @@
       position: fixed;
       top: 0;
       right: 0;
-      background-color: #f8bbd0;
+      background-color: #f8bbd0; /* وردي فاتح */
       overflow-x: hidden;
       transition: 0.3s;
       padding-top: 60px;
       box-shadow: -2px 0 5px rgba(0,0,0,0.2);
     }
     .side-menu a {
-      padding: 12px 20px;
+      padding: 14px 22px;
       text-decoration: none;
       color: #333;
       display: block;
       transition: 0.2s;
       font-weight: bold;
+      font-size: 20px;
     }
     .side-menu a:hover {
       background-color: #f48fb1;
@@ -67,25 +74,26 @@
       margin: 10px;
       padding: 15px;
       border-radius: 12px;
-      width: 200px;
+      width: 220px;
       text-align: center;
       background: white;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
     .product img {
-      width: 150px;
-      height: 150px;
+      width: 160px;
+      height: 160px;
       border-radius: 10px;
     }
     button {
       margin-top: 10px;
-      padding: 6px 12px;
+      padding: 8px 14px;
       border: none;
       border-radius: 6px;
       background-color: #e75480;
       color: white;
       cursor: pointer;
       font-weight: bold;
+      font-size: 16px;
     }
     button:hover {
       background-color: #d64570;
@@ -99,7 +107,7 @@
       width: 280px;
       height: 100%;
       background-color: #fff;
-      border-left: 2px solid #e75480;
+      border-left: 3px solid #e75480;
       color: #333;
       padding: 20px;
       display: none;
@@ -113,6 +121,7 @@
     .cart-items {
       flex: 1;
       overflow-y: auto;
+      margin-bottom: 10px;
     }
 
     /* طرق الدفع */
@@ -122,6 +131,7 @@
     .payment label {
       display: block;
       margin-bottom: 8px;
+      font-size: 18px;
     }
   </style>
 </head>
@@ -146,24 +156,24 @@
   <!-- المنتجات -->
   <div id="products" class="products">
     <div class="product" data-cat="makeup">
-      <img src="images/lipstick.jpg" alt="روج">
-      <h3>روج - Golden Rose</h3>
+      <img src="images/lipstick.jpg" alt="روج من Golden Rose">
+      <h3>روج صغير - Golden Rose</h3>
       <p>السعر: 40 ريال</p>
-      <button onclick="addToCart('روج', 40)">أضف للسلة</button>
+      <button onclick="addToCart('روج Golden Rose', 40)">أضف للسلة</button>
     </div>
 
     <div class="product" data-cat="perfume">
-      <img src="images/perfume.jpg" alt="عطر">
-      <h3>عطر - Lavern</h3>
+      <img src="images/georgina.jpg" alt="عطر جورجينا">
+      <h3>عطر جورجينا - Lavern</h3>
       <p>السعر: 60 ريال</p>
-      <button onclick="addToCart('عطر', 60)">أضف للسلة</button>
+      <button onclick="addToCart('عطر جورجينا', 60)">أضف للسلة</button>
     </div>
 
     <div class="product" data-cat="cream">
-      <img src="images/cream.jpg" alt="كريم">
+      <img src="images/foundation.jpg" alt="كريم أساس Golden Rose">
       <h3>كريم أساس - Golden Rose</h3>
       <p>السعر: 55 ريال</p>
-      <button onclick="addToCart('كريم أساس', 55)">أضف للسلة</button>
+      <button onclick="addToCart('كريم أساس Golden Rose', 55)">أضف للسلة</button>
     </div>
   </div>
 
@@ -185,7 +195,7 @@
   <script>
     // القائمة
     function openMenu() {
-      document.getElementById("sideMenu").style.width = "250px";
+      document.getElementById("sideMenu").style.width = "260px";
     }
     function closeMenu() {
       document.getElementById("sideMenu").style.width = "0";
