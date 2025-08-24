@@ -2,111 +2,106 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>متجر التجميل</title>
+  <title>متجر تجميلي</title>
   <style>
     body { font-family: Arial, sans-serif; margin:0; }
     header {
-      background:#111; color:#fff; padding:10px;
+      background:#f13584; color:#fff; padding:10px;
       display:flex; justify-content:space-between; align-items:center;
     }
-    .menu-btn { font-size:24px; cursor:pointer; }
-    .sidebar {
-      height:100%; width:0; position:fixed; top:0; right:0;
-      background:#f13584; overflow-x:hidden; transition:0.4s; padding-top:60px;
+    .cart-btn { cursor:pointer; font-size:20px; }
+    .products {
+      display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
+      gap:15px; padding:20px;
     }
-    .sidebar a {
-      padding:10px 20px; text-decoration:none; color:#fff; display:block;
-    }
-    .sidebar a:hover { background:#e3246a; }
-    .content { padding:20px; }
     .card {
-      border:1px solid #ddd; border-radius:10px; padding:15px;
-      margin:10px; display:inline-block; width:200px; vertical-align:top;
-      text-align:center;
+      border:1px solid #ccc; padding:15px; border-radius:10px; text-align:center;
     }
-    .card img { width:100%; height:150px; object-fit:cover; border-radius:10px; }
     .card button {
       background:#f13584; color:#fff; border:none; padding:10px;
       border-radius:5px; cursor:pointer;
     }
-    .login-box {
-      width:300px; margin:50px auto; border:1px solid #ccc; padding:20px; border-radius:10px;
+    .cart-box {
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.6); display:none; justify-content:center; align-items:center;
     }
-    .login-box input {
-      width:100%; padding:10px; margin:5px 0; border:1px solid #ccc; border-radius:5px;
+    .cart-content {
+      background:#fff; padding:20px; border-radius:10px; width:300px;
     }
-    .login-box button {
-      width:100%; padding:10px; background:#f13584; border:none; color:#fff; border-radius:5px;
+    .cart-content h3 { margin-top:0; }
+    .cart-content ul { list-style:none; padding:0; }
+    .cart-content li { padding:5px 0; border-bottom:1px solid #ddd; }
+    .checkout-btn {
+      margin-top:10px; width:100%; padding:10px;
+      background:#f13584; color:#fff; border:none; border-radius:5px;
     }
   </style>
 </head>
 <body>
 
-  <!-- القائمة الجانبية -->
-  <div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" onclick="closeNav()">✖ إغلاق</a>
-    <a href="#">مكياج</a>
-    <a href="#">عطور</a>
-    <a href="#">حسابي</a>
+<header>
+  <h2>💄 متجر التجميل</h2>
+  <span class="cart-btn" onclick="openCart()">🛒 <span id="cart-count">0</span></span>
+</header>
+
+<div class="products">
+  <div class="card">
+    <h3>روج صغير - Golden Rose</h3>
+    <p>روج مميز من Golden Rose بألوان جذابة</p>
+    <button onclick="addToCart('روج صغير - Golden Rose')">أضف للسلة</button>
   </div>
-
-  <!-- تسجيل دخول -->
-  <div id="loginPage" class="login-box">
-    <h2>تسجيل الدخول</h2>
-    <input type="email" id="email" placeholder="الإيميل">
-    <input type="text" id="phone" placeholder="رقم الجوال">
-    <input type="password" id="password" placeholder="كلمة المرور">
-    <button onclick="login()">دخول</button>
+  <div class="card">
+    <h3>عطر جورجينا - Laverne</h3>
+    <p>عطر فاخر برائحة تدوم طويلاً</p>
+    <button onclick="addToCart('عطر جورجينا - Laverne')">أضف للسلة</button>
   </div>
-
-  <!-- محتوى الموقع -->
-  <div id="mainPage" style="display:none;">
-    <header>
-      <span>💄 متجر التجميل</span>
-      <span class="menu-btn" onclick="openNav()">☰</span>
-    </header>
-    <div class="content">
-      <div class="card">
-        <img src="images/rouge.jpg" alt="روج">
-        <h3>روج صغير - Golden Rose</h3>
-        <p>روج مميز بحجم صغير وألوان جذابة من Golden Rose</p>
-        <button>شراء</button>
-      </div>
-      <div class="card">
-        <img src="images/perfume.jpg" alt="عطر">
-        <h3>عطر جورجينا - Laverne</h3>
-        <p>عطر فاخر من لافيرن بتركيبة مميزة تدوم طويلاً</p>
-        <button>شراء</button>
-      </div>
-      <div class="card">
-        <img src="images/foundation.jpg" alt="كريم اساس">
-        <h3>كريم أساس - Golden Rose</h3>
-        <p>كريم أساس خفيف ومناسب لجميع أنواع البشرة</p>
-        <button>شراء</button>
-      </div>
-    </div>
+  <div class="card">
+    <h3>كريم أساس - Golden Rose</h3>
+    <p>كريم أساس بتركيبة خفيفة وناعمة</p>
+    <button onclick="addToCart('كريم أساس - Golden Rose')">أضف للسلة</button>
   </div>
+</div>
 
-  <script>
-    function openNav() {
-      document.getElementById("mySidebar").style.width = "250px";
-    }
-    function closeNav() {
-      document.getElementById("mySidebar").style.width = "0";
-    }
-    function login() {
-      let email = document.getElementById("email").value;
-      let phone = document.getElementById("phone").value;
-      let pass = document.getElementById("password").value;
+<!-- نافذة السلة -->
+<div class="cart-box" id="cartBox">
+  <div class="cart-content">
+    <h3>🛒 سلة التسوق</h3>
+    <ul id="cart-items"></ul>
+    <button class="checkout-btn" onclick="checkout()">إتمام الطلب</button>
+    <button class="checkout-btn" style="background:#aaa;" onclick="closeCart()">إغلاق</button>
+  </div>
+</div>
 
-      if(email && phone && pass){
-        document.getElementById("loginPage").style.display="none";
-        document.getElementById("mainPage").style.display="block";
-      } else {
-        alert("من فضلك ادخل جميع البيانات");
-      }
-    }
-  </script>
+<script>
+  let cart = [];
+
+  function addToCart(item){
+    cart.push(item);
+    document.getElementById("cart-count").innerText = cart.length;
+    updateCart();
+  }
+
+  function updateCart(){
+    let cartList = document.getElementById("cart-items");
+    cartList.innerHTML = "";
+    cart.forEach(p => {
+      let li = document.createElement("li");
+      li.textContent = p;
+      cartList.appendChild(li);
+    });
+  }
+
+  function openCart(){
+    document.getElementById("cartBox").style.display="flex";
+  }
+  function closeCart(){
+    document.getElementById("cartBox").style.display="none";
+  }
+
+  function checkout(){
+    alert("الرجاء تسجيل الدخول أو إدخال بياناتك لإتمام الطلب ✅");
+  }
+</script>
 
 </body>
 </html>
