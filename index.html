@@ -57,7 +57,7 @@
 
     /* المنتجات */
     .products {
-      display: none; /* نخفي الكل أول */
+      display: flex;
       flex-wrap: wrap;
       justify-content: center;
       margin: 20px;
@@ -114,6 +114,15 @@
       flex: 1;
       overflow-y: auto;
     }
+
+    /* طرق الدفع */
+    .payment {
+      margin-top: 15px;
+    }
+    .payment label {
+      display: block;
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 <body>
@@ -127,33 +136,30 @@
 
   <!-- القائمة الجانبية -->
   <div id="sideMenu" class="side-menu">
-    <a href="javascript:void(0)" onclick="showCategory('makeup')">💄 مكياج</a>
-    <a href="javascript:void(0)" onclick="showCategory('perfume')">🌸 عطور</a>
-    <a href="javascript:void(0)" onclick="showCategory('cream')">🧴 كريمات</a>
+    <a href="javascript:void(0)" onclick="filterCategory('all')">🏠 كل المنتجات</a>
+    <a href="javascript:void(0)" onclick="filterCategory('makeup')">💄 مكياج</a>
+    <a href="javascript:void(0)" onclick="filterCategory('perfume')">🌸 عطور</a>
+    <a href="javascript:void(0)" onclick="filterCategory('cream')">🧴 كريمات</a>
     <a href="javascript:void(0)" onclick="closeMenu()">❌ إغلاق</a>
   </div>
 
   <!-- المنتجات -->
-  <div id="makeup" class="products">
-    <div class="product">
+  <div id="products" class="products">
+    <div class="product" data-cat="makeup">
       <img src="images/lipstick.jpg" alt="روج من Golden Rose">
       <h3>روج صغير - Golden Rose</h3>
       <p>السعر: 40 ريال</p>
       <button onclick="addToCart('روج Golden Rose', 40)">أضف للسلة</button>
     </div>
-  </div>
 
-  <div id="perfume" class="products">
-    <div class="product">
+    <div class="product" data-cat="perfume">
       <img src="images/georgina.jpg" alt="عطر جورجينا">
       <h3>عطر جورجينا - Lavern</h3>
       <p>السعر: 60 ريال</p>
       <button onclick="addToCart('عطر جورجينا', 60)">أضف للسلة</button>
     </div>
-  </div>
 
-  <div id="cream" class="products">
-    <div class="product">
+    <div class="product" data-cat="cream">
       <img src="images/foundation.jpg" alt="كريم أساس Golden Rose">
       <h3>كريم أساس - Golden Rose</h3>
       <p>السعر: 55 ريال</p>
@@ -166,6 +172,13 @@
     <h2>🛒 السلة</h2>
     <div class="cart-items"></div>
     <p id="total">الإجمالي: 0 ريال</p>
+
+    <div class="payment">
+      <h3>طرق الدفع:</h3>
+      <label><input type="radio" name="payment" value="بطاقة"> 💳 بطاقة</label>
+      <label><input type="radio" name="payment" value="دفع عند الاستلام"> 💵 دفع عند الاستلام</label>
+    </div>
+
     <button onclick="checkout()">إتمام الشراء</button>
   </div>
 
@@ -178,12 +191,17 @@
       document.getElementById("sideMenu").style.width = "0";
     }
 
-    // عرض التصنيفات
-    function showCategory(catId) {
+    // الفلترة
+    function filterCategory(cat) {
       closeMenu();
-      let categories = document.querySelectorAll(".products");
-      categories.forEach(cat => cat.style.display = "none");
-      document.getElementById(catId).style.display = "flex";
+      let products = document.querySelectorAll(".product");
+      products.forEach(p => {
+        if (cat === "all" || p.getAttribute("data-cat") === cat) {
+          p.style.display = "block";
+        } else {
+          p.style.display = "none";
+        }
+      });
     }
 
     // السلة
@@ -212,10 +230,18 @@
     }
 
     function checkout() {
-      alert("✅ تم إرسال طلبك");
+      const payment = document.querySelector('input[name="payment"]:checked');
+      if (!payment) {
+        alert("⚠️ من فضلك اختر طريقة الدفع");
+        return;
+      }
+      alert("✅ تم إرسال طلبك. طريقة الدفع: " + payment.value);
       cart = [];
       updateCart();
     }
+
+    // عند الفتح أول مرة → عرض كل المنتجات
+    window.onload = () => filterCategory("all");
   </script>
 </body>
 </html>
