@@ -9,6 +9,7 @@
       font-family: Arial, sans-serif;
       background-color: #111;
       color: white;
+      direction: rtl;
     }
 
     /* الهيدر */
@@ -33,7 +34,7 @@
       width: 0;
       position: fixed;
       top: 0;
-      left: 0;
+      right: 0;
       background-color: #333;
       overflow-x: hidden;
       transition: 0.3s;
@@ -84,7 +85,7 @@
     /* السلة */
     .cart {
       position: fixed;
-      right: 0;
+      left: 0;
       top: 0;
       width: 300px;
       height: 100%;
@@ -109,4 +110,88 @@
   <header>
     <span class="menu-btn" onclick="openMenu()">☰</span>
     <h1>Nawras Flowers</h1>
-    <span class="cart-btn" onclick="toggleCart()">
+    <span class="cart-btn" onclick="toggleCart()">🛒</span>
+  </header>
+
+  <!-- القائمة الجانبية -->
+  <div id="sideMenu" class="side-menu">
+    <a href="#">مكياج</a>
+    <a href="#">عطور</a>
+    <a href="#">كريمات</a>
+    <a href="javascript:void(0)" onclick="closeMenu()">❌ إغلاق</a>
+  </div>
+
+  <!-- المنتجات -->
+  <div class="products">
+    <div class="product">
+      <img src="images/lipstick.jpg" alt="روج من Golden Rose">
+      <h3>روج صغير - Golden Rose</h3>
+      <p>السعر: 40 ريال</p>
+      <button onclick="addToCart('روج Golden Rose', 40)">أضف للسلة</button>
+    </div>
+
+    <div class="product">
+      <img src="images/georgina.jpg" alt="عطر جورجينا">
+      <h3>عطر جورجينا - Lavern</h3>
+      <p>السعر: 60 ريال</p>
+      <button onclick="addToCart('عطر جورجينا', 60)">أضف للسلة</button>
+    </div>
+
+    <div class="product">
+      <img src="images/foundation.jpg" alt="كريم أساس Golden Rose">
+      <h3>كريم أساس - Golden Rose</h3>
+      <p>السعر: 55 ريال</p>
+      <button onclick="addToCart('كريم أساس Golden Rose', 55)">أضف للسلة</button>
+    </div>
+  </div>
+
+  <!-- السلة -->
+  <div id="cart" class="cart">
+    <h2>🛒 السلة</h2>
+    <div class="cart-items"></div>
+    <p id="total">الإجمالي: 0 ريال</p>
+    <button onclick="checkout()">إتمام الشراء</button>
+  </div>
+
+  <script>
+    // القائمة
+    function openMenu() {
+      document.getElementById("sideMenu").style.width = "250px";
+    }
+    function closeMenu() {
+      document.getElementById("sideMenu").style.width = "0";
+    }
+
+    // السلة
+    let cart = [];
+    function toggleCart() {
+      const cartBox = document.getElementById("cart");
+      cartBox.style.display = (cartBox.style.display === "flex") ? "none" : "flex";
+    }
+
+    function addToCart(name, price) {
+      cart.push({name, price});
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartItems = document.querySelector(".cart-items");
+      cartItems.innerHTML = "";
+      let total = 0;
+      cart.forEach(item => {
+        const div = document.createElement("div");
+        div.textContent = item.name + " - " + item.price + " ريال";
+        cartItems.appendChild(div);
+        total += item.price;
+      });
+      document.getElementById("total").textContent = "الإجمالي: " + total + " ريال";
+    }
+
+    function checkout() {
+      alert("تم إرسال طلبك ✅");
+      cart = [];
+      updateCart();
+    }
+  </script>
+</body>
+</html>
