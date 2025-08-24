@@ -1,67 +1,247 @@
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #ffe4ec; /* خلفية وردية فاتحة */
-    color: #333;
-    direction: rtl;
-  }
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>متجر العطور و التجميل</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff0f5; /* وردي فاتح */
+      color: #333;
+      direction: rtl;
+    }
 
-  /* الحاوية الرئيسية */
-  .container {
-    max-width: 1200px;       /* عرض ثابت */
-    margin: 40px auto;       /* يخليها بالنص */
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-    padding: 20px;
-  }
+    /* الهيدر */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background-color: #e75480; /* وردي غامق */
+      color: white;
+    }
+    header h1 {
+      font-size: 22px;
+    }
+    .menu-btn, .cart-btn {
+      font-size: 26px;
+      cursor: pointer;
+    }
 
-  /* المنتجات */
-  .products {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
+    /* القائمة الجانبية */
+    .side-menu {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: #f8bbd0; /* وردي فاتح */
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+    }
+    .side-menu a {
+      padding: 12px 20px;
+      text-decoration: none;
+      color: #333;
+      display: block;
+      transition: 0.2s;
+      font-weight: bold;
+    }
+    .side-menu a:hover {
+      background-color: #f48fb1;
+      color: white;
+    }
 
-  .product {
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    width: 220px;
-    background: #fff;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: 0.3s;
-  }
-  .product:hover {
-    transform: translateY(-5px);
-  }
+    /* المنتجات */
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px;
+    }
+    .product {
+      border: 1px solid #ddd;
+      margin: 10px;
+      padding: 15px;
+      border-radius: 12px;
+      width: 200px;
+      text-align: center;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .product img {
+      width: 150px;
+      height: 150px;
+      border-radius: 10px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      background-color: #e75480;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #d64570;
+    }
 
-  .product img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
+    /* السلة */
+    .cart {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 300px;
+      height: 100%;
+      background-color: #fff;
+      border-left: 2px solid #e75480;
+      color: #333;
+      padding: 20px;
+      display: none;
+      flex-direction: column;
+      box-shadow: 2px 0 6px rgba(0,0,0,0.2);
+    }
+    .cart h2 {
+      margin-top: 0;
+      color: #e75480;
+    }
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+    }
 
-  /* السلة */
-  .cart {
-    position: fixed;
-    right: -350px;
-    top: 0;
-    width: 300px;
-    height: 100%;
-    background-color: #fff;
-    border-left: 2px solid #e75480;
-    padding: 20px;
-    box-shadow: -2px 0 8px rgba(0,0,0,0.25);
-    transition: 0.3s;
-    z-index: 3;
-    overflow-y: auto;
-  }
-  .cart.open {
-    right: 0;
-  }
-</style>
+    /* طرق الدفع */
+    .payment {
+      margin-top: 15px;
+    }
+    .payment label {
+      display: block;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الهيدر -->
+  <header>
+    <span class="menu-btn" onclick="openMenu()">☰</span>
+    <h1>متجر العطور و التجميل</h1>
+    <span class="cart-btn" onclick="toggleCart()">🛒</span>
+  </header>
+
+  <!-- القائمة الجانبية -->
+  <div id="sideMenu" class="side-menu">
+    <a href="javascript:void(0)" onclick="filterCategory('all')">🏠 كل المنتجات</a>
+    <a href="javascript:void(0)" onclick="filterCategory('makeup')">💄 مكياج</a>
+    <a href="javascript:void(0)" onclick="filterCategory('perfume')">🌸 عطور</a>
+    <a href="javascript:void(0)" onclick="filterCategory('cream')">🧴 كريمات</a>
+    <a href="javascript:void(0)" onclick="closeMenu()">❌ إغلاق</a>
+  </div>
+
+  <!-- المنتجات -->
+  <div id="products" class="products">
+    <div class="product" data-cat="makeup">
+      <img src="images/lipstick.jpg" alt="روج من Golden Rose">
+      <h3>روج صغير - Golden Rose</h3>
+      <p>السعر: 40 ريال</p>
+      <button onclick="addToCart('روج Golden Rose', 40)">أضف للسلة</button>
+    </div>
+
+    <div class="product" data-cat="perfume">
+      <img src="images/perfume.jpg" alt="عطر جورجينا">
+      <h3>عطر جورجينا - Lavern</h3>
+      <p>السعر: 60 ريال</p>
+      <button onclick="addToCart('عطر جورجينا', 60)">أضف للسلة</button>
+    </div>
+
+    <div class="product" data-cat="cream">
+      <img src="images/foundation.jpg" alt="كريم أساس Golden Rose">
+      <h3>كريم أساس - Golden Rose</h3>
+      <p>السعر: 55 ريال</p>
+      <button onclick="addToCart('كريم أساس Golden Rose', 55)">أضف للسلة</button>
+    </div>
+  </div>
+
+  <!-- السلة -->
+  <div id="cart" class="cart">
+    <h2>🛒 السلة</h2>
+    <div class="cart-items"></div>
+    <p id="total">الإجمالي: 0 ريال</p>
+
+    <div class="payment">
+      <h3>طرق الدفع:</h3>
+      <label><input type="radio" name="payment" value="بطاقة"> 💳 بطاقة</label>
+      <label><input type="radio" name="payment" value="دفع عند الاستلام"> 💵 دفع عند الاستلام</label>
+    </div>
+
+    <button onclick="checkout()">إتمام الشراء</button>
+  </div>
+
+  <script>
+    // القائمة
+    function openMenu() {
+      document.getElementById("sideMenu").style.width = "250px";
+    }
+    function closeMenu() {
+      document.getElementById("sideMenu").style.width = "0";
+    }
+
+    // الفلترة
+    function filterCategory(cat) {
+      closeMenu();
+      let products = document.querySelectorAll(".product");
+      products.forEach(p => {
+        if (cat === "all" || p.getAttribute("data-cat") === cat) {
+          p.style.display = "block";
+        } else {
+          p.style.display = "none";
+        }
+      });
+    }
+
+    // السلة
+    let cart = [];
+    function toggleCart() {
+      const cartBox = document.getElementById("cart");
+      cartBox.style.display = (cartBox.style.display === "flex") ? "none" : "flex";
+    }
+
+    function addToCart(name, price) {
+      cart.push({name, price});
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartItems = document.querySelector(".cart-items");
+      cartItems.innerHTML = "";
+      let total = 0;
+      cart.forEach(item => {
+        const div = document.createElement("div");
+        div.textContent = item.name + " - " + item.price + " ريال";
+        cartItems.appendChild(div);
+        total += item.price;
+      });
+      document.getElementById("total").textContent = "الإجمالي: " + total + " ريال";
+    }
+
+    function checkout() {
+      const payment = document.querySelector('input[name="payment"]:checked');
+      if (!payment) {
+        alert("⚠️ من فضلك اختر طريقة الدفع");
+        return;
+      }
+      alert("✅ تم إرسال طلبك. طريقة الدفع: " + payment.value);
+      cart = [];
+      updateCart();
+    }
+
+    // عند الفتح أول مرة → عرض كل المنتجات
+    window.onload = () => filterCategory("all");
+  </script>
+</body>
+</html>
