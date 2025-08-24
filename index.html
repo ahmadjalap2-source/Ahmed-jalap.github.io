@@ -6,115 +6,100 @@
   <style>
     body {
       margin: 0;
-      font-family: "Tajawal", Arial, sans-serif;
-      background: #fffafc;
+      font-family: 'Tahoma', Arial, sans-serif;
+      background-color: #fffafc; /* أبيض ناعم */
       color: #333;
       direction: rtl;
     }
 
-    /* ====== الهيدر ====== */
+    /* الهيدر */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 20px;
-      background: linear-gradient(90deg, #e75480, #ff9eb5);
+      padding: 15px;
+      background-color: #e75480; /* وردي غامق */
       color: white;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
     header h1 {
-      font-size: 22px;
+      font-size: 24px;
       margin: 0;
-      font-weight: bold;
-      letter-spacing: 1px;
     }
     .menu-btn, .cart-btn {
-      font-size: 26px;
+      font-size: 28px;
       cursor: pointer;
     }
 
-    /* ====== القائمة الجانبية ====== */
+    /* القائمة الجانبية */
     .side-menu {
       height: 100%;
       width: 0;
       position: fixed;
       top: 0;
       right: 0;
-      background-color: #fff;
-      border-left: 3px solid #e75480;
+      background-color: #ffe4ec; /* وردي فاتح */
       overflow-x: hidden;
       transition: 0.3s;
       padding-top: 60px;
-      box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+      box-shadow: -2px 0 8px rgba(0,0,0,0.2);
     }
     .side-menu a {
       padding: 14px 22px;
       text-decoration: none;
       color: #333;
       display: block;
-      font-size: 18px;
-      font-weight: bold;
-      border-bottom: 1px solid #f3f3f3;
       transition: 0.2s;
+      font-weight: bold;
     }
     .side-menu a:hover {
-      background: #ffe4ec;
-      color: #e75480;
+      background-color: #e75480;
+      color: white;
+      border-radius: 8px;
     }
 
-    /* ====== المنتجات ====== */
+    /* المنتجات */
     .products {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      padding: 20px;
+      margin: 30px;
     }
     .product {
-      border: 1px solid #eee;
+      border: 1px solid #f0d6e7;
       margin: 12px;
       padding: 15px;
-      border-radius: 16px;
+      border-radius: 14px;
       width: 220px;
-      background: white;
       text-align: center;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-      transition: 0.3s;
+      background: white;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
     }
     .product:hover {
       transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
     }
     .product img {
       width: 160px;
       height: 160px;
       border-radius: 12px;
-      object-fit: cover;
-    }
-    .product h3 {
-      font-size: 18px;
-      margin: 12px 0 6px;
-      color: #444;
-    }
-    .product p {
-      color: #e75480;
-      font-weight: bold;
     }
     button {
       margin-top: 10px;
       padding: 8px 14px;
       border: none;
       border-radius: 8px;
-      background: #e75480;
+      background-color: #d4af37; /* ذهبي */
       color: white;
-      font-size: 14px;
       cursor: pointer;
-      transition: 0.3s;
+      font-weight: bold;
+      transition: 0.2s;
     }
     button:hover {
-      background: #d64570;
+      background-color: #b8962f; /* ذهبي أغمق */
     }
 
-    /* ====== السلة ====== */
+    /* السلة */
     .cart {
       position: fixed;
       left: 0;
@@ -127,31 +112,28 @@
       padding: 20px;
       display: none;
       flex-direction: column;
-      box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+      box-shadow: 3px 0 10px rgba(0,0,0,0.2);
     }
     .cart h2 {
       margin-top: 0;
       color: #e75480;
-      border-bottom: 2px solid #ffe4ec;
-      padding-bottom: 8px;
     }
     .cart-items {
       flex: 1;
       overflow-y: auto;
-      margin-bottom: 15px;
     }
 
-    /* ====== طرق الدفع ====== */
+    /* طرق الدفع */
     .payment {
-      margin-top: 10px;
-      background: #fff5f8;
+      margin-top: 15px;
       padding: 10px;
+      background: #fff0f5;
       border-radius: 10px;
     }
     .payment label {
       display: block;
       margin-bottom: 8px;
-      cursor: pointer;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -176,24 +158,24 @@
   <!-- المنتجات -->
   <div id="products" class="products">
     <div class="product" data-cat="makeup">
-      <img src="images/lipstick.jpg" alt="روج">
-      <h3>روج - Golden Rose</h3>
-      <p>40 ريال</p>
+      <img src="images/lipstick.jpg" alt="روج من Golden Rose">
+      <h3>روج صغير - Golden Rose</h3>
+      <p>السعر: 40 ريال</p>
       <button onclick="addToCart('روج Golden Rose', 40)">أضف للسلة</button>
     </div>
 
     <div class="product" data-cat="perfume">
-      <img src="images/perfume.jpg" alt="عطر">
-      <h3>عطر جورجينا</h3>
-      <p>60 ريال</p>
+      <img src="images/georgina.jpg" alt="عطر جورجينا">
+      <h3>عطر جورجينا - Lavern</h3>
+      <p>السعر: 60 ريال</p>
       <button onclick="addToCart('عطر جورجينا', 60)">أضف للسلة</button>
     </div>
 
     <div class="product" data-cat="cream">
-      <img src="images/cream.jpg" alt="كريم أساس">
-      <h3>كريم أساس</h3>
-      <p>55 ريال</p>
-      <button onclick="addToCart('كريم أساس', 55)">أضف للسلة</button>
+      <img src="images/foundation.jpg" alt="كريم أساس Golden Rose">
+      <h3>كريم أساس - Golden Rose</h3>
+      <p>السعر: 55 ريال</p>
+      <button onclick="addToCart('كريم أساس Golden Rose', 55)">أضف للسلة</button>
     </div>
   </div>
 
@@ -270,6 +252,7 @@
       updateCart();
     }
 
+    // عند الفتح أول مرة → عرض كل المنتجات
     window.onload = () => filterCategory("all");
   </script>
 </body>
