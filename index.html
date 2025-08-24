@@ -41,6 +41,7 @@
       transition: 0.3s;
       padding-top: 60px;
       box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+      z-index: 2;
     }
     .side-menu a {
       padding: 12px 20px;
@@ -91,10 +92,10 @@
       background-color: #d64570;
     }
 
-    /* السلة */
+    /* السلة (يمين) */
     .cart {
       position: fixed;
-      left: 0;
+      right: -350px;
       top: 0;
       width: 300px;
       height: 100%;
@@ -102,9 +103,14 @@
       border-left: 2px solid #e75480;
       color: #333;
       padding: 20px;
-      display: none;
+      display: flex;
       flex-direction: column;
-      box-shadow: 2px 0 6px rgba(0,0,0,0.2);
+      box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+      transition: 0.3s;
+      z-index: 3;
+    }
+    .cart.open {
+      right: 0;
     }
     .cart h2 {
       margin-top: 0;
@@ -145,6 +151,14 @@
 
   <!-- المنتجات -->
   <div id="products" class="products">
+    <!-- منتج تجريبي -->
+    <div class="product" data-cat="makeup">
+      <img src="images/IMG_2504.jpeg" alt="منتج خاص">
+      <h3>منتج تجريبي</h3>
+      <p>السعر: 100 ريال</p>
+      <button onclick="addToCart('منتج تجريبي', 100)">أضف للسلة</button>
+    </div>
+
     <div class="product" data-cat="makeup">
       <img src="images/lipstick.jpg" alt="روج من Golden Rose">
       <h3>روج صغير - Golden Rose</h3>
@@ -208,7 +222,7 @@
     let cart = [];
     function toggleCart() {
       const cartBox = document.getElementById("cart");
-      cartBox.style.display = (cartBox.style.display === "flex") ? "none" : "flex";
+      cartBox.classList.toggle("open");
     }
 
     function addToCart(name, price) {
@@ -240,7 +254,7 @@
       updateCart();
     }
 
-    // عند الفتح أول مرة → عرض كل المنتجات
+    // عرض كل المنتجات عند الفتح
     window.onload = () => filterCategory("all");
   </script>
 </body>
