@@ -6,8 +6,9 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Tahoma', Arial, sans-serif;
-      background-color: #fffafc; /* أبيض ناعم */
+      font-family: Arial, sans-serif;
+      /* خلفية متدرجة وردي + ذهبي */
+      background: linear-gradient(135deg, #f8bbd0, #ffd700);
       color: #333;
       direction: rtl;
     }
@@ -18,13 +19,13 @@
       justify-content: space-between;
       align-items: center;
       padding: 15px;
-      background-color: #e75480; /* وردي غامق */
+      background: linear-gradient(90deg, #e75480, #ffd700);
       color: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     header h1 {
       font-size: 24px;
-      margin: 0;
+      font-weight: bold;
     }
     .menu-btn, .cart-btn {
       font-size: 28px;
@@ -38,24 +39,23 @@
       position: fixed;
       top: 0;
       right: 0;
-      background-color: #ffe4ec; /* وردي فاتح */
+      background: linear-gradient(180deg, #ffd700, #f8bbd0);
       overflow-x: hidden;
       transition: 0.3s;
       padding-top: 60px;
-      box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+      box-shadow: -2px 0 6px rgba(0,0,0,0.3);
     }
     .side-menu a {
-      padding: 14px 22px;
+      padding: 12px 20px;
       text-decoration: none;
       color: #333;
       display: block;
-      transition: 0.2s;
       font-weight: bold;
+      transition: 0.2s;
     }
     .side-menu a:hover {
       background-color: #e75480;
       color: white;
-      border-radius: 8px;
     }
 
     /* المنتجات */
@@ -63,40 +63,40 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin: 30px;
+      margin: 20px;
     }
     .product {
-      border: 1px solid #f0d6e7;
-      margin: 12px;
+      border: 2px solid #ffd700;
+      margin: 10px;
       padding: 15px;
-      border-radius: 14px;
+      border-radius: 15px;
       width: 220px;
       text-align: center;
       background: white;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
       transition: transform 0.2s;
     }
     .product:hover {
-      transform: translateY(-5px);
+      transform: scale(1.05);
     }
     .product img {
-      width: 160px;
-      height: 160px;
-      border-radius: 12px;
+      width: 150px;
+      height: 150px;
+      border-radius: 10px;
+      border: 2px solid #e75480;
     }
     button {
       margin-top: 10px;
       padding: 8px 14px;
       border: none;
-      border-radius: 8px;
-      background-color: #d4af37; /* ذهبي */
+      border-radius: 6px;
+      background: linear-gradient(90deg, #e75480, #ffd700);
       color: white;
       cursor: pointer;
       font-weight: bold;
-      transition: 0.2s;
     }
     button:hover {
-      background-color: #b8962f; /* ذهبي أغمق */
+      opacity: 0.85;
     }
 
     /* السلة */
@@ -107,12 +107,12 @@
       width: 320px;
       height: 100%;
       background-color: #fff;
-      border-left: 3px solid #e75480;
+      border-left: 4px solid #ffd700;
       color: #333;
       padding: 20px;
       display: none;
       flex-direction: column;
-      box-shadow: 3px 0 10px rgba(0,0,0,0.2);
+      box-shadow: 3px 0 8px rgba(0,0,0,0.3);
     }
     .cart h2 {
       margin-top: 0;
@@ -126,14 +126,10 @@
     /* طرق الدفع */
     .payment {
       margin-top: 15px;
-      padding: 10px;
-      background: #fff0f5;
-      border-radius: 10px;
     }
     .payment label {
       display: block;
       margin-bottom: 8px;
-      font-weight: bold;
     }
   </style>
 </head>
@@ -197,7 +193,7 @@
   <script>
     // القائمة
     function openMenu() {
-      document.getElementById("sideMenu").style.width = "260px";
+      document.getElementById("sideMenu").style.width = "250px";
     }
     function closeMenu() {
       document.getElementById("sideMenu").style.width = "0";
