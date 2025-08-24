@@ -22,16 +22,16 @@
       color: white;
     }
     header h1 {
-      font-size: 26px;
+      font-size: 28px;
     }
 
     .menu-btn {
-      font-size: 40px; /* أكبر */
+      font-size: 48px; /* أكبر */
       cursor: pointer;
     }
 
     .cart-btn {
-      font-size: 45px; /* أكبر */
+      font-size: 52px; /* أكبر */
       cursor: pointer;
     }
 
@@ -47,15 +47,16 @@
       transition: 0.3s;
       padding-top: 60px;
       box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+      z-index: 1000;
     }
     .side-menu a {
-      padding: 14px 22px;
+      padding: 16px 24px;
       text-decoration: none;
       color: #333;
       display: block;
       transition: 0.2s;
       font-weight: bold;
-      font-size: 20px;
+      font-size: 22px;
     }
     .side-menu a:hover {
       background-color: #f48fb1;
@@ -71,29 +72,30 @@
     }
     .product {
       border: 1px solid #ddd;
-      margin: 10px;
+      margin: 12px;
       padding: 15px;
       border-radius: 12px;
-      width: 220px;
+      width: 240px;
       text-align: center;
       background: white;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
     .product img {
-      width: 160px;
-      height: 160px;
+      width: 180px;
+      height: 180px;
       border-radius: 10px;
+      object-fit: cover;
     }
     button {
       margin-top: 10px;
-      padding: 8px 14px;
+      padding: 10px 16px;
       border: none;
       border-radius: 6px;
       background-color: #e75480;
       color: white;
       cursor: pointer;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 18px;
     }
     button:hover {
       background-color: #d64570;
@@ -104,7 +106,7 @@
       position: fixed;
       left: 0;
       top: 0;
-      width: 280px;
+      width: 320px; /* أكبر */
       height: 100%;
       background-color: #fff;
       border-left: 3px solid #e75480;
@@ -113,15 +115,18 @@
       display: none;
       flex-direction: column;
       box-shadow: 2px 0 6px rgba(0,0,0,0.2);
+      z-index: 1000;
     }
     .cart h2 {
       margin-top: 0;
       color: #e75480;
+      font-size: 24px;
     }
     .cart-items {
       flex: 1;
       overflow-y: auto;
       margin-bottom: 10px;
+      font-size: 18px;
     }
 
     /* طرق الدفع */
@@ -130,8 +135,8 @@
     }
     .payment label {
       display: block;
-      margin-bottom: 8px;
-      font-size: 18px;
+      margin-bottom: 10px;
+      font-size: 20px;
     }
   </style>
 </head>
@@ -195,7 +200,7 @@
   <script>
     // القائمة
     function openMenu() {
-      document.getElementById("sideMenu").style.width = "260px";
+      document.getElementById("sideMenu").style.width = "280px";
     }
     function closeMenu() {
       document.getElementById("sideMenu").style.width = "0";
