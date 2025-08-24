@@ -1,107 +1,112 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>متجر تجميلي</title>
+  <title>Nawras Flowers</title>
   <style>
-    body { font-family: Arial, sans-serif; margin:0; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: white;
+    }
+
+    /* الهيدر */
     header {
-      background:#f13584; color:#fff; padding:10px;
-      display:flex; justify-content:space-between; align-items:center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background-color: #222;
     }
-    .cart-btn { cursor:pointer; font-size:20px; }
+    header h1 {
+      font-size: 20px;
+    }
+    .menu-btn, .cart-btn {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* القائمة الجانبية */
+    .side-menu {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #333;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+    }
+    .side-menu a {
+      padding: 10px 20px;
+      text-decoration: none;
+      color: white;
+      display: block;
+      transition: 0.2s;
+    }
+    .side-menu a:hover {
+      background-color: #444;
+    }
+
+    /* المنتجات */
     .products {
-      display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
-      gap:15px; padding:20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px;
     }
-    .card {
-      border:1px solid #ccc; padding:15px; border-radius:10px; text-align:center;
+    .product {
+      border: 1px solid #555;
+      margin: 10px;
+      padding: 15px;
+      border-radius: 10px;
+      width: 200px;
+      text-align: center;
+      background: #1c1c1c;
     }
-    .card button {
-      background:#f13584; color:#fff; border:none; padding:10px;
-      border-radius:5px; cursor:pointer;
+    .product img {
+      width: 150px;
+      height: 150px;
+      border-radius: 10px;
     }
-    .cart-box {
-      position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.6); display:none; justify-content:center; align-items:center;
+    button {
+      margin-top: 10px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #ff9800;
+      color: white;
+      cursor: pointer;
     }
-    .cart-content {
-      background:#fff; padding:20px; border-radius:10px; width:300px;
+
+    /* السلة */
+    .cart {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 300px;
+      height: 100%;
+      background-color: #222;
+      color: white;
+      padding: 20px;
+      display: none;
+      flex-direction: column;
     }
-    .cart-content h3 { margin-top:0; }
-    .cart-content ul { list-style:none; padding:0; }
-    .cart-content li { padding:5px 0; border-bottom:1px solid #ddd; }
-    .checkout-btn {
-      margin-top:10px; width:100%; padding:10px;
-      background:#f13584; color:#fff; border:none; border-radius:5px;
+    .cart h2 {
+      margin-top: 0;
+    }
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h2>💄 متجر التجميل</h2>
-  <span class="cart-btn" onclick="openCart()">🛒 <span id="cart-count">0</span></span>
-</header>
-
-<div class="products">
-  <div class="card">
-    <h3>روج صغير - Golden Rose</h3>
-    <p>روج مميز من Golden Rose بألوان جذابة</p>
-    <button onclick="addToCart('روج صغير - Golden Rose')">أضف للسلة</button>
-  </div>
-  <div class="card">
-    <h3>عطر جورجينا - Laverne</h3>
-    <p>عطر فاخر برائحة تدوم طويلاً</p>
-    <button onclick="addToCart('عطر جورجينا - Laverne')">أضف للسلة</button>
-  </div>
-  <div class="card">
-    <h3>كريم أساس - Golden Rose</h3>
-    <p>كريم أساس بتركيبة خفيفة وناعمة</p>
-    <button onclick="addToCart('كريم أساس - Golden Rose')">أضف للسلة</button>
-  </div>
-</div>
-
-<!-- نافذة السلة -->
-<div class="cart-box" id="cartBox">
-  <div class="cart-content">
-    <h3>🛒 سلة التسوق</h3>
-    <ul id="cart-items"></ul>
-    <button class="checkout-btn" onclick="checkout()">إتمام الطلب</button>
-    <button class="checkout-btn" style="background:#aaa;" onclick="closeCart()">إغلاق</button>
-  </div>
-</div>
-
-<script>
-  let cart = [];
-
-  function addToCart(item){
-    cart.push(item);
-    document.getElementById("cart-count").innerText = cart.length;
-    updateCart();
-  }
-
-  function updateCart(){
-    let cartList = document.getElementById("cart-items");
-    cartList.innerHTML = "";
-    cart.forEach(p => {
-      let li = document.createElement("li");
-      li.textContent = p;
-      cartList.appendChild(li);
-    });
-  }
-
-  function openCart(){
-    document.getElementById("cartBox").style.display="flex";
-  }
-  function closeCart(){
-    document.getElementById("cartBox").style.display="none";
-  }
-
-  function checkout(){
-    alert("الرجاء تسجيل الدخول أو إدخال بياناتك لإتمام الطلب ✅");
-  }
-</script>
-
-</body>
-</html>
+  <!-- الهيدر -->
+  <header>
+    <span class="menu-btn" onclick="openMenu()">☰</span>
+    <h1>Nawras Flowers</h1>
+    <span class="cart-btn" onclick="toggleCart()">
