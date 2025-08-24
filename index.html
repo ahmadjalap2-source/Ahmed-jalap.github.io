@@ -7,8 +7,8 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #111;
-      color: white;
+      background-color: #fff0f5; /* وردي فاتح */
+      color: #333;
       direction: rtl;
     }
 
@@ -18,13 +18,14 @@
       justify-content: space-between;
       align-items: center;
       padding: 15px;
-      background-color: #222;
+      background-color: #e75480; /* وردي غامق */
+      color: white;
     }
     header h1 {
-      font-size: 20px;
+      font-size: 22px;
     }
     .menu-btn, .cart-btn {
-      font-size: 24px;
+      font-size: 26px;
       cursor: pointer;
     }
 
@@ -35,37 +36,41 @@
       position: fixed;
       top: 0;
       right: 0;
-      background-color: #333;
+      background-color: #f8bbd0; /* وردي فاتح */
       overflow-x: hidden;
       transition: 0.3s;
       padding-top: 60px;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.2);
     }
     .side-menu a {
-      padding: 10px 20px;
+      padding: 12px 20px;
       text-decoration: none;
-      color: white;
+      color: #333;
       display: block;
       transition: 0.2s;
+      font-weight: bold;
     }
     .side-menu a:hover {
-      background-color: #444;
+      background-color: #f48fb1;
+      color: white;
     }
 
     /* المنتجات */
     .products {
-      display: flex;
+      display: none; /* نخفي الكل أول */
       flex-wrap: wrap;
       justify-content: center;
       margin: 20px;
     }
     .product {
-      border: 1px solid #555;
+      border: 1px solid #ddd;
       margin: 10px;
       padding: 15px;
-      border-radius: 10px;
+      border-radius: 12px;
       width: 200px;
       text-align: center;
-      background: #1c1c1c;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
     .product img {
       width: 150px;
@@ -74,12 +79,16 @@
     }
     button {
       margin-top: 10px;
-      padding: 5px 10px;
+      padding: 6px 12px;
       border: none;
-      border-radius: 5px;
-      background-color: #ff9800;
+      border-radius: 6px;
+      background-color: #e75480;
       color: white;
       cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #d64570;
     }
 
     /* السلة */
@@ -89,14 +98,17 @@
       top: 0;
       width: 300px;
       height: 100%;
-      background-color: #222;
-      color: white;
+      background-color: #fff;
+      border-left: 2px solid #e75480;
+      color: #333;
       padding: 20px;
       display: none;
       flex-direction: column;
+      box-shadow: 2px 0 6px rgba(0,0,0,0.2);
     }
     .cart h2 {
       margin-top: 0;
+      color: #e75480;
     }
     .cart-items {
       flex: 1;
@@ -115,28 +127,32 @@
 
   <!-- القائمة الجانبية -->
   <div id="sideMenu" class="side-menu">
-    <a href="#">مكياج</a>
-    <a href="#">عطور</a>
-    <a href="#">كريمات</a>
+    <a href="javascript:void(0)" onclick="showCategory('makeup')">💄 مكياج</a>
+    <a href="javascript:void(0)" onclick="showCategory('perfume')">🌸 عطور</a>
+    <a href="javascript:void(0)" onclick="showCategory('cream')">🧴 كريمات</a>
     <a href="javascript:void(0)" onclick="closeMenu()">❌ إغلاق</a>
   </div>
 
   <!-- المنتجات -->
-  <div class="products">
+  <div id="makeup" class="products">
     <div class="product">
       <img src="images/lipstick.jpg" alt="روج من Golden Rose">
       <h3>روج صغير - Golden Rose</h3>
       <p>السعر: 40 ريال</p>
       <button onclick="addToCart('روج Golden Rose', 40)">أضف للسلة</button>
     </div>
+  </div>
 
+  <div id="perfume" class="products">
     <div class="product">
       <img src="images/georgina.jpg" alt="عطر جورجينا">
       <h3>عطر جورجينا - Lavern</h3>
       <p>السعر: 60 ريال</p>
       <button onclick="addToCart('عطر جورجينا', 60)">أضف للسلة</button>
     </div>
+  </div>
 
+  <div id="cream" class="products">
     <div class="product">
       <img src="images/foundation.jpg" alt="كريم أساس Golden Rose">
       <h3>كريم أساس - Golden Rose</h3>
@@ -160,6 +176,14 @@
     }
     function closeMenu() {
       document.getElementById("sideMenu").style.width = "0";
+    }
+
+    // عرض التصنيفات
+    function showCategory(catId) {
+      closeMenu();
+      let categories = document.querySelectorAll(".products");
+      categories.forEach(cat => cat.style.display = "none");
+      document.getElementById(catId).style.display = "flex";
     }
 
     // السلة
@@ -188,7 +212,7 @@
     }
 
     function checkout() {
-      alert("تم إرسال طلبك ✅");
+      alert("✅ تم إرسال طلبك");
       cart = [];
       updateCart();
     }
